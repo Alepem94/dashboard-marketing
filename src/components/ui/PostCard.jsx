@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Heart, MessageCircle, Share2, Eye, Play, ExternalLink } from 'lucide-react'
-import { formatNumber } from '../hooks/useSheetData'
+import { formatNumber } from '../../hooks/useSheetData'
 import clsx from 'clsx'
 
 // Iconos de plataforma
