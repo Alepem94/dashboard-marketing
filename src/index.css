@@ -3,52 +3,43 @@
 @tailwind utilities;
 
 :root {
-  --color-surface-900: #0a0a0f;
-  --color-surface-800: #12121a;
-  --color-surface-700: #1a1a24;
-  --color-accent: #818cf8;
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #1a1a24 transparent;
-}
-
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #1a1a24;
-  border-radius: 3px;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #2a2a34;
+  --color-bg: #09090b;
+  --color-surface: #18181b;
+  --color-accent: #6366f1;
 }
 
 body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  background-color: var(--color-surface-900);
-  color: #ffffff;
+  background-color: #09090b;
+  color: #fafafa;
+  min-height: 100vh;
 }
 
-.font-mono {
-  font-family: 'JetBrains Mono', monospace;
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #18181b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #1a1a24 25%, #2a2a34 50%, #1a1a24 75%);
+  background: linear-gradient(90deg, #18181b 25%, #27272a 50%, #18181b 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
