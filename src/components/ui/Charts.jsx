@@ -16,9 +16,8 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts'
-import { formatNumber, formatCurrency } from '../hooks/useSheetData'
+import { formatNumber, formatCurrency } from '../../hooks/useSheetData'
 
-// Paleta de colores premium
 const COLORS = {
   primary: '#6366f1',
   secondary: '#8b5cf6',
@@ -39,7 +38,6 @@ const GRADIENT_COLORS = [
   { start: '#06b6d4', end: '#22d3ee' },
 ]
 
-// Tooltip personalizado
 const CustomTooltip = ({ active, payload, label, formatter }) => {
   if (!active || !payload?.length) return null
 
@@ -66,7 +64,6 @@ const CustomTooltip = ({ active, payload, label, formatter }) => {
   )
 }
 
-// Gráfica de Área con gradiente
 export function AreaChartComponent({ 
   data, 
   dataKey, 
@@ -83,7 +80,7 @@ export function AreaChartComponent({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl border border-white/5 bg-surface-900/50 p-6"
+      className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6"
     >
       {title && (
         <h3 className="text-lg font-semibold mb-6">{title}</h3>
@@ -129,7 +126,6 @@ export function AreaChartComponent({
   )
 }
 
-// Gráfica de Líneas múltiples
 export function MultiLineChart({ 
   data, 
   lines = [],
@@ -142,7 +138,7 @@ export function MultiLineChart({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl border border-white/5 bg-surface-900/50 p-6"
+      className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6"
     >
       {title && (
         <h3 className="text-lg font-semibold mb-6">{title}</h3>
@@ -186,7 +182,6 @@ export function MultiLineChart({
   )
 }
 
-// Gráfica de Barras horizontal
 export function HorizontalBarChart({
   data,
   dataKey,
@@ -200,7 +195,7 @@ export function HorizontalBarChart({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl border border-white/5 bg-surface-900/50 p-6"
+      className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6"
     >
       {title && (
         <h3 className="text-lg font-semibold mb-6">{title}</h3>
@@ -240,7 +235,6 @@ export function HorizontalBarChart({
   )
 }
 
-// Gráfica de Barras agrupadas
 export function GroupedBarChart({
   data,
   bars = [],
@@ -253,7 +247,7 @@ export function GroupedBarChart({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl border border-white/5 bg-surface-900/50 p-6"
+      className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6"
     >
       {title && (
         <h3 className="text-lg font-semibold mb-6">{title}</h3>
@@ -294,7 +288,6 @@ export function GroupedBarChart({
   )
 }
 
-// Gráfica Donut
 export function DonutChart({
   data,
   title,
@@ -305,7 +298,7 @@ export function DonutChart({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl border border-white/5 bg-surface-900/50 p-6"
+      className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6"
     >
       {title && (
         <h3 className="text-lg font-semibold mb-6">{title}</h3>
@@ -341,11 +334,10 @@ export function DonutChart({
   )
 }
 
-// Skeleton para gráficas
 export function ChartSkeleton({ height = 300 }) {
   return (
     <div 
-      className="rounded-2xl border border-white/5 bg-surface-900/50 p-6 animate-pulse"
+      className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6 animate-pulse"
       style={{ height }}
     >
       <div className="h-5 w-32 bg-white/10 rounded mb-6" />
