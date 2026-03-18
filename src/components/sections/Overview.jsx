@@ -10,11 +10,11 @@ export function Overview({ data, historical, loading }) {
     return <OverviewSkeleton />
   }
 
-  const { kpis, metas } = data
-  const prevKpis = historical.kpis?.[1] || {} // Mes anterior
+  const kpis = data?.kpis || {}
+  const metas = data?.metas || []
+  const prevKpis = historical?.kpis?.[1] || {}
 
-  // Preparar datos para gráfica de tendencia
-  const trendData = historical.kpis?.slice(0, 6).reverse().map(k => ({
+  const trendData = historical?.kpis?.slice(0, 6).reverse().map(k => ({
     mes: k.mes?.split('-')[1] || '',
     comunidad: Number(k.comunidad_fb || 0) + Number(k.comunidad_ig || 0) + Number(k.comunidad_tk || 0),
     alcance: Number(k.alcance_total || 0),
@@ -23,7 +23,6 @@ export function Overview({ data, historical, loading }) {
 
   return (
     <div className="space-y-6">
-      {/* Page Title */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -32,7 +31,6 @@ export function Overview({ data, historical, loading }) {
         <p className="text-zinc-400 mt-1">Vista consolidada de todas las plataformas</p>
       </motion.div>
 
-      {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KPICard
           title="Comunidad Total"
@@ -75,52 +73,60 @@ export function Overview({ data, historical, loading }) {
         />
       </div>
 
-      {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Trend Chart */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="rounded-2xl border border-white/5 bg-surface-900/50 p-6"
+          className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6"
         >
           <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-accent-400" />
+            <TrendingUp className="w-5 h-5 text-indigo-400" />
             Tendencia de Alcance
           </h3>
-          <AreaChartComponent
-            data={trendData}
-            dataKey="alcance"
-            xAxisKey="mes"
-            color="#818cf8"
-            height={250}
-          />
+          {trendData.length > 0 ? (
+            <AreaChartComponent
+              data={trendData}
+              dataKey="alcance"
+              xKey="mes"
+              color="#818cf8"
+              height={250}
+            />
+          ) : (
+            <div className="h-64 flex items-center justify-center text-zinc-500">
+              No hay datos históricos
+            </div>
+          )}
         </motion.div>
 
-        {/* Multi-metric Chart */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="rounded-2xl border border-white/5 bg-surface-900/50 p-6"
+          className="rounded-2xl border border-white/5 bg-zinc-900/50 p-6"
         >
           <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
             <Target className="w-5 h-5 text-emerald-400" />
             Comunidad vs Interacción
           </h3>
-          <MultiLineChart
-            data={trendData}
-            lines={[
-              { dataKey: 'comunidad', color: '#818cf8', name: 'Comunidad' },
-              { dataKey: 'interaccion', color: '#34d399', name: 'Interacciones' },
-            ]}
-            xAxisKey="mes"
-            height={250}
-          />
+          {trendData.length > 0 ? (
+            <MultiLineChart
+              data={trendData}
+              lines={[
+                { dataKey: 'comunidad', color: '#818cf8', name: 'Comunidad' },
+                { dataKey: 'interaccion', color: '#34d399', name: 'Interacciones' },
+              ]}
+              xKey="mes"
+              height={250}
+            />
+          ) : (
+            <div className="h-64 flex items-center justify-center text-zinc-500">
+              No hay datos históricos
+            </div>
+          )}
         </motion.div>
       </div>
 
-      {/* Metas Table */}
       {metas && metas.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -131,7 +137,6 @@ export function Overview({ data, historical, loading }) {
         </motion.div>
       )}
 
-      {/* Platform Summary Cards */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -141,19 +146,19 @@ export function Overview({ data, historical, loading }) {
         <PlatformSummaryCard
           platform="Facebook"
           emoji="📘"
-          followers={formatNumber(kpis.comunidad_fb)}
+          followers={formatNumber(kpis.comunidad_fb || 0)}
           color="blue"
         />
         <PlatformSummaryCard
           platform="Instagram"
           emoji="📸"
-          followers={formatNumber(kpis.comunidad_ig)}
+          followers={formatNumber(kpis.comunidad_ig || 0)}
           color="pink"
         />
         <PlatformSummaryCard
           platform="TikTok"
           emoji="🎵"
-          followers={formatNumber(kpis.comunidad_tk)}
+          followers={formatNumber(kpis.comunidad_tk || 0)}
           color="cyan"
         />
       </motion.div>
