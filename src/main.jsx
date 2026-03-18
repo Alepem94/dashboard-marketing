@@ -1,13 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
-import './index.css'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { BrandSelector } from './pages/BrandSelector'
+import { Dashboard } from './pages/Dashboard'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-)
+export default function App() {
+  return (
+    <Routes>
+      {/* Página inicial: selector de marca */}
+      <Route path="/" element={<BrandSelector />} />
+      
+      {/* Dashboard con marca seleccionada */}
+      <Route path="/dashboard/:marcaId/*" element={<Dashboard />} />
+      
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  )
+}
