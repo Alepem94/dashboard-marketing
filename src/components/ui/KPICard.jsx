@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown, Minus, ChevronRight } from 'lucide-react'
-import { formatNumber, formatPercent } from '../hooks/useSheetData'
+import { formatNumber, formatPercent } from '../../hooks/useSheetData'
 import clsx from 'clsx'
 
 export function KPICard({ 
